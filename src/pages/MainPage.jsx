@@ -10,16 +10,18 @@ import NewsResult from '../components/NewsResults'
 const MainPage = () => {
   return (
     <div className='flex flex-col justify-between'>
-        <Navbar/>
+        
         <BrowserRouter>
+        <Navbar/>
             <Routes>
-                <Route path='/all' element={<AllResults />} />
-                <Route path='/videos' element={<VideoResults/>}/>
-                <Route path='/images' element={<ImageResults/>}/>
-                <Route path='/news' element={<NewsResult/>}/>
+                <Route exact path='/' element={<AllResults />} />
+                <Route exact path='/videos' element={<VideoResults/>}/>
+                <Route  path='/images' element={<ImageResults/>}/>
+                <Route  path='/news' element={<NewsResult/>}/>
             </Routes>
-        </BrowserRouter>
         <Footer/>
+        </BrowserRouter>
+        
     </div>
   )
 }
