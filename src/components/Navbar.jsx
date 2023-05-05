@@ -1,13 +1,39 @@
 import React from 'react';
 import searchIcon  from "./search.png"
 import { Link, NavLink } from 'react-router-dom';
+import axios from 'axios';
+
 
 const Navbar = () => {
-    function SearchResults(e) {
+    const SearchResults = async (e) => {
         e.preventDefault();
         const searchInputValue = e.target.searchInput.value;
         console.log(searchInputValue);
+        const options = {
+            method: 'GET',
+            url: 'https://google-search74.p.rapidapi.com/',
+            params: {
+              query: searchInputValue,
+              limit: '10',
+              related_keywords: 'true'
+            },
+            headers: {
+              'X-RapidAPI-Key': '260dd5e289mshdb96ae4cccefbfap11a919jsn5685b58126c9',
+              'X-RapidAPI-Host': 'google-search74.p.rapidapi.com'
+            }
+          };
+          
+          try {
+              const response = await axios.request(options);
+              console.log(response.data);
+              const responseData = response.data;
+
+          } catch (error) {
+              console.error(error);
+          }
     }
+
+    
     
   return (
     <div className="mainDiv">
@@ -30,11 +56,14 @@ const Navbar = () => {
             <NavLink to="/images"><p className=' hover:text-sky-600'>Images</p></NavLink>
             <NavLink to="/news"><p className=' hover:text-sky-600'>News</p></NavLink>   </div>
     </div>
+    
 </div>
 
     
     
   )
 }
+
+// export const resData = response.data;
 
 export default Navbar
